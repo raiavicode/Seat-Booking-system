@@ -1,0 +1,31 @@
+# Copy this file to terraform.tfvars and fill in real values.
+# terraform.tfvars is where your ACTUAL config lives -- add it to
+# .gitignore (see .gitignore in this repo) so you never accidentally
+# commit real VPC IDs, email addresses, or SNS ARNs alongside this
+# public reference code.
+
+project_name = "seatbook"
+environment  = "dev"
+aws_region   = "us-east-1"
+
+# ---- Required: an existing VPC with private subnets ----
+# This repo does NOT create a VPC. See the README's "Prerequisites"
+# section for what your VPC needs (specifically: NAT egress for
+# Process Payment to reach an external payment gateway).
+vpc_id              = "vpc-REPLACE_ME"
+private_subnet_ids  = ["subnet-REPLACE_ME_1", "subnet-REPLACE_ME_2"]
+
+# ---- Required: an email address you control ----
+# AWS SES will send a verification link here after the first
+# apply. Confirmations won't send until you click it.
+ses_sender_address = "bookings@yourdomain.com"
+
+# ---- Optional ----
+lock_ttl_seconds     = 600
+alarm_sns_topic_arn  = ""
+
+tags = {
+  ManagedBy = "terraform"
+  Project   = "seat-booking-reference-architecture"
+  Owner     = "REPLACE_ME"
+}

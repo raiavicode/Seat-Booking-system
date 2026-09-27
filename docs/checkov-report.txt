@@ -1,0 +1,1310 @@
+2026-09-26 13:33:41,689 [MainThread  ] [WARNI]  Failed to get the checkov mappings and guidelines from https://api0.prismacloud.io/bridgecrew/api/v2/guidelines. Skips using BC_* IDs will not work.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/checkov/common/bridgecrew/platform_integration.py", line 1284, in get_public_run_config
+    self.public_metadata_response = json.loads(request.data.decode("utf8"))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+       _               _
+   ___| |__   ___  ___| | _______   __
+  / __| '_ \ / _ \/ __| |/ / _ \ \ / /
+ | (__| | | |  __/ (__|   < (_) \ V /
+  \___|_| |_|\___|\___|_|\_\___/ \_/
+
+By Prisma Cloud | version: 3.3.19 
+
+terraform scan results:
+
+Passed checks: 311, Failed checks: 27, Skipped checks: 0
+
+Check: CKV_AWS_33: "Ensure KMS key policy does not contain wildcard (*) principal"
+	PASSED for resource: aws_kms_key.app
+	File: /main.tf:34-79
+Check: CKV_AWS_227: "Ensure KMS key is enabled"
+	PASSED for resource: aws_kms_key.app
+	File: /main.tf:34-79
+Check: CKV_AWS_7: "Ensure rotation for customer created CMKs is enabled"
+	PASSED for resource: aws_kms_key.app
+	File: /main.tf:34-79
+Check: CKV_AWS_24: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22"
+	PASSED for resource: aws_security_group.lambda_vpc
+	File: /main.tf:126-137
+Check: CKV_AWS_260: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80"
+	PASSED for resource: aws_security_group.lambda_vpc
+	File: /main.tf:126-137
+Check: CKV_AWS_382: "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+	PASSED for resource: aws_security_group.lambda_vpc
+	File: /main.tf:126-137
+Check: CKV_AWS_277: "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1"
+	PASSED for resource: aws_security_group.lambda_vpc
+	File: /main.tf:126-137
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: aws_security_group.lambda_vpc
+	File: /main.tf:126-137
+Check: CKV_AWS_25: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389"
+	PASSED for resource: aws_security_group.lambda_vpc
+	File: /main.tf:126-137
+Check: CKV_AWS_382: "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+	PASSED for resource: aws_security_group_rule.lambda_vpc_egress_https
+	File: /main.tf:139-147
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: aws_security_group_rule.lambda_vpc_egress_https
+	File: /main.tf:139-147
+Check: CKV_AWS_382: "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+	PASSED for resource: aws_security_group_rule.lambda_vpc_egress_redis
+	File: /main.tf:149-157
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: aws_security_group_rule.lambda_vpc_egress_redis
+	File: /main.tf:149-157
+Check: CKV_AWS_192: "Ensure WAF prevents message lookup in Log4j2. See CVE-2021-44228 aka log4jshell"
+	PASSED for resource: aws_wafv2_web_acl.cloudfront
+	File: /main.tf:257-329
+Check: CKV_AWS_342: "Ensure WAF rule has any actions"
+	PASSED for resource: aws_wafv2_web_acl.cloudfront
+	File: /main.tf:257-329
+Check: CKV_AWS_175: "Ensure WAF has associated rules"
+	PASSED for resource: aws_wafv2_web_acl.cloudfront
+	File: /main.tf:257-329
+Check: CKV_AWS_66: "Ensure that CloudWatch Log Group specifies retention days"
+	PASSED for resource: aws_cloudwatch_log_group.waf_cloudfront
+	File: /main.tf:334-339
+Check: CKV_AWS_338: "Ensure CloudWatch log groups retains logs for at least 1 year"
+	PASSED for resource: aws_cloudwatch_log_group.waf_cloudfront
+	File: /main.tf:334-339
+Check: CKV_AWS_192: "Ensure WAF prevents message lookup in Log4j2. See CVE-2021-44228 aka log4jshell"
+	PASSED for resource: aws_wafv2_web_acl.api_gateway
+	File: /main.tf:348-407
+Check: CKV_AWS_342: "Ensure WAF rule has any actions"
+	PASSED for resource: aws_wafv2_web_acl.api_gateway
+	File: /main.tf:348-407
+Check: CKV_AWS_175: "Ensure WAF has associated rules"
+	PASSED for resource: aws_wafv2_web_acl.api_gateway
+	File: /main.tf:348-407
+Check: CKV_AWS_66: "Ensure that CloudWatch Log Group specifies retention days"
+	PASSED for resource: aws_cloudwatch_log_group.waf_api_gateway
+	File: /main.tf:409-413
+Check: CKV_AWS_338: "Ensure CloudWatch log groups retains logs for at least 1 year"
+	PASSED for resource: aws_cloudwatch_log_group.waf_api_gateway
+	File: /main.tf:409-413
+Check: CKV_AWS_364: "Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount"
+	PASSED for resource: aws_lambda_permission.eventbridge_invoke_release_lock
+	File: /main.tf:443-449
+Check: CKV_AWS_301: "Ensure that AWS Lambda function is not publicly accessible"
+	PASSED for resource: aws_lambda_permission.eventbridge_invoke_release_lock
+	File: /main.tf:443-449
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+	Calling File: /main.tf:226-236
+Check: CKV2_AWS_70: "Ensure API gateway method has authorization or API key set"
+	PASSED for resource: module.api_gateway.aws_api_gateway_method.create_booking
+	File: /modules/api-gateway/main.tf:50-57
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_59: "Ensure there is no open access to back-end resources through API"
+	PASSED for resource: module.api_gateway.aws_api_gateway_method.create_booking
+	File: /modules/api-gateway/main.tf:50-57
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_61: "Ensure AWS IAM policy does not allow assume role permission across all services"
+	PASSED for resource: module.api_gateway.aws_iam_role.apigw_step_functions
+	File: /modules/api-gateway/main.tf:73-77
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_60: "Ensure IAM role allows only specific services or principals to assume it"
+	PASSED for resource: module.api_gateway.aws_iam_role.apigw_step_functions
+	File: /modules/api-gateway/main.tf:73-77
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.api_gateway.aws_iam_role.apigw_step_functions
+	File: /modules/api-gateway/main.tf:73-77
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_393: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order on IAM role"
+	PASSED for resource: module.api_gateway.aws_iam_role.apigw_step_functions
+	File: /modules/api-gateway/main.tf:73-77
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_62: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.api_gateway.aws_iam_role_policy.apigw_start_execution
+	File: /modules/api-gateway/main.tf:87-91
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_63: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.api_gateway.aws_iam_role_policy.apigw_start_execution
+	File: /modules/api-gateway/main.tf:87-91
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_217: "Ensure Create before destroy for API deployments"
+	PASSED for resource: module.api_gateway.aws_api_gateway_deployment.this
+	File: /modules/api-gateway/main.tf:134-152
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_73: "Ensure API Gateway has X-Ray Tracing enabled"
+	PASSED for resource: module.api_gateway.aws_api_gateway_stage.this
+	File: /modules/api-gateway/main.tf:154-179
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_76: "Ensure API Gateway has Access Logging enabled"
+	PASSED for resource: module.api_gateway.aws_api_gateway_stage.this
+	File: /modules/api-gateway/main.tf:154-179
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_66: "Ensure that CloudWatch Log Group specifies retention days"
+	PASSED for resource: module.api_gateway.aws_cloudwatch_log_group.api_access
+	File: /modules/api-gateway/main.tf:181-186
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_158: "Ensure that CloudWatch Log Group is encrypted by KMS"
+	PASSED for resource: module.api_gateway.aws_cloudwatch_log_group.api_access
+	File: /modules/api-gateway/main.tf:181-186
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_338: "Ensure CloudWatch log groups retains logs for at least 1 year"
+	PASSED for resource: module.api_gateway.aws_cloudwatch_log_group.api_access
+	File: /modules/api-gateway/main.tf:181-186
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_308: "Ensure API Gateway method setting caching is set to encrypted"
+	PASSED for resource: module.api_gateway.aws_api_gateway_method_settings.this
+	File: /modules/api-gateway/main.tf:192-203
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_276: "Ensure Data Trace is not enabled in API Gateway Method Settings"
+	PASSED for resource: module.api_gateway.aws_api_gateway_method_settings.this
+	File: /modules/api-gateway/main.tf:192-203
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_27: "Ensure all data stored in the SQS queue is encrypted"
+	PASSED for resource: module.async_notifications.aws_sqs_queue.notifications
+	File: /modules/async-notifications/main.tf:24-48
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_168: "Ensure SQS queue policy is not public by only allowing specific services or principals to access it"
+	PASSED for resource: module.async_notifications.aws_sqs_queue.notifications
+	File: /modules/async-notifications/main.tf:24-48
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_27: "Ensure all data stored in the SQS queue is encrypted"
+	PASSED for resource: module.async_notifications.aws_sqs_queue.notifications_dlq
+	File: /modules/async-notifications/main.tf:50-54
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_168: "Ensure SQS queue policy is not public by only allowing specific services or principals to access it"
+	PASSED for resource: module.async_notifications.aws_sqs_queue.notifications_dlq
+	File: /modules/async-notifications/main.tf:50-54
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_61: "Ensure AWS IAM policy does not allow assume role permission across all services"
+	PASSED for resource: module.async_notifications.aws_iam_role.pipe_role
+	File: /modules/async-notifications/main.tf:72-76
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_60: "Ensure IAM role allows only specific services or principals to assume it"
+	PASSED for resource: module.async_notifications.aws_iam_role.pipe_role
+	File: /modules/async-notifications/main.tf:72-76
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.async_notifications.aws_iam_role.pipe_role
+	File: /modules/async-notifications/main.tf:72-76
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_393: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order on IAM role"
+	PASSED for resource: module.async_notifications.aws_iam_role.pipe_role
+	File: /modules/async-notifications/main.tf:72-76
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_62: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.async_notifications.aws_iam_role_policy.pipe_permissions
+	File: /modules/async-notifications/main.tf:110-114
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_63: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.async_notifications.aws_iam_role_policy.pipe_permissions
+	File: /modules/async-notifications/main.tf:110-114
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_62: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.async_notifications.aws_iam_policy.sqs_consume
+	File: /modules/async-notifications/main.tf:167-170
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_63: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.async_notifications.aws_iam_policy.sqs_consume
+	File: /modules/async-notifications/main.tf:167-170
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_26: "Ensure all data stored in the SNS topic is encrypted"
+	PASSED for resource: module.async_notifications.aws_sns_topic.booking_events
+	File: /modules/async-notifications/main.tf:174-178
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_62: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.async_notifications.aws_iam_policy.notify_permissions
+	File: /modules/async-notifications/main.tf:206-209
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_63: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.async_notifications.aws_iam_policy.notify_permissions
+	File: /modules/async-notifications/main.tf:206-209
+	Calling File: /main.tf:171-179
+Check: CKV_AWS_366: "Ensure AWS Cognito identity pool does not allow unauthenticated guest access"
+	PASSED for resource: module.cognito.aws_cognito_identity_pool.this
+	File: /modules/cognito/main.tf:81-92
+	Calling File: /main.tf:110-115
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_119: "Ensure DynamoDB Tables are encrypted using a KMS Customer Managed CMK"
+	PASSED for resource: module.dynamodb.aws_dynamodb_table.slots
+	File: /modules/dynamodb/main.tf:33-125
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_28: "Ensure DynamoDB point in time recovery (backup) is enabled"
+	PASSED for resource: module.dynamodb.aws_dynamodb_table.slots
+	File: /modules/dynamodb/main.tf:33-125
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_62: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.dynamodb.aws_iam_policy.slots_rw
+	File: /modules/dynamodb/main.tf:162-166
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_63: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.dynamodb.aws_iam_policy.slots_rw
+	File: /modules/dynamodb/main.tf:162-166
+	Calling File: /main.tf:102-108
+Check: CKV_AWS_24: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22"
+	PASSED for resource: module.elasticache.aws_security_group.cache
+	File: /modules/elasticache/main.tf:32-47
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_260: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80"
+	PASSED for resource: module.elasticache.aws_security_group.cache
+	File: /modules/elasticache/main.tf:32-47
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_382: "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.elasticache.aws_security_group.cache
+	File: /modules/elasticache/main.tf:32-47
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_277: "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.elasticache.aws_security_group.cache
+	File: /modules/elasticache/main.tf:32-47
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.elasticache.aws_security_group.cache
+	File: /modules/elasticache/main.tf:32-47
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_25: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389"
+	PASSED for resource: module.elasticache.aws_security_group.cache
+	File: /modules/elasticache/main.tf:32-47
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_24: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22"
+	PASSED for resource: module.elasticache.aws_security_group_rule.cache_ingress_from_lambda
+	File: /modules/elasticache/main.tf:49-57
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_260: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80"
+	PASSED for resource: module.elasticache.aws_security_group_rule.cache_ingress_from_lambda
+	File: /modules/elasticache/main.tf:49-57
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_277: "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.elasticache.aws_security_group_rule.cache_ingress_from_lambda
+	File: /modules/elasticache/main.tf:49-57
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.elasticache.aws_security_group_rule.cache_ingress_from_lambda
+	File: /modules/elasticache/main.tf:49-57
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_25: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389"
+	PASSED for resource: module.elasticache.aws_security_group_rule.cache_ingress_from_lambda
+	File: /modules/elasticache/main.tf:49-57
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_323: "Ensure ElastiCache clusters do not use the default subnet group"
+	PASSED for resource: module.elasticache.aws_elasticache_cluster.this
+	File: /modules/elasticache/main.tf:59-87
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_322: "Ensure ElastiCache for Redis cache clusters have auto minor version upgrades enabled"
+	PASSED for resource: module.elasticache.aws_elasticache_cluster.this
+	File: /modules/elasticache/main.tf:59-87
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_134: "Ensure that Amazon ElastiCache Redis clusters have automatic backup turned on"
+	PASSED for resource: module.elasticache.aws_elasticache_cluster.this
+	File: /modules/elasticache/main.tf:59-87
+	Calling File: /main.tf:159-167
+Check: CKV_AWS_216: "Ensure CloudFront distribution is enabled"
+	PASSED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+	Calling File: /main.tf:240-250
+Check: CKV_AWS_68: "CloudFront Distribution should have WAF enabled"
+	PASSED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+	Calling File: /main.tf:240-250
+Check: CKV_AWS_305: "Ensure CloudFront distribution has a default root object configured"
+	PASSED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+	Calling File: /main.tf:240-250
+Check: CKV_AWS_34: "Ensure CloudFront distribution ViewerProtocolPolicy is set to HTTPS"
+	PASSED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+	Calling File: /main.tf:240-250
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_61: "Ensure AWS IAM policy does not allow assume role permission across all services"
+	PASSED for resource: module.iam.aws_iam_role.lambda_execution
+	File: /modules/iam/main.tf:32-36
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_60: "Ensure IAM role allows only specific services or principals to assume it"
+	PASSED for resource: module.iam.aws_iam_role.lambda_execution
+	File: /modules/iam/main.tf:32-36
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.iam.aws_iam_role.lambda_execution
+	File: /modules/iam/main.tf:32-36
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_393: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order on IAM role"
+	PASSED for resource: module.iam.aws_iam_role.lambda_execution
+	File: /modules/iam/main.tf:32-36
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.iam.aws_iam_role_policy_attachment.lambda_basic_execution
+	File: /modules/iam/main.tf:44-47
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.iam.aws_iam_role_policy_attachment.lambda_xray
+	File: /modules/iam/main.tf:54-57
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_62: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.iam.aws_iam_role_policy.kms_decrypt
+	File: /modules/iam/main.tf:82-86
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_63: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.iam.aws_iam_role_policy.kms_decrypt
+	File: /modules/iam/main.tf:82-86
+	Calling File: /main.tf:86-92
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_27: "Ensure all data stored in the SQS queue is encrypted"
+	PASSED for resource: module.lambda_functions.aws_sqs_queue.lambda_dlq
+	File: /modules/lambda-functions/main.tf:35-39
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_168: "Ensure SQS queue policy is not public by only allowing specific services or principals to access it"
+	PASSED for resource: module.lambda_functions.aws_sqs_queue.lambda_dlq
+	File: /modules/lambda-functions/main.tf:35-39
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_62: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.lambda_functions.aws_iam_policy.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:50-53
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_63: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.lambda_functions.aws_iam_policy.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:50-53
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.lambda_functions.aws_iam_role_policy_attachment.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:55-58
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_115: "Ensure that AWS Lambda function is configured for function-level concurrent execution limit"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.search
+	File: /modules/lambda-functions/main.tf:68-102
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_173: "Check encryption settings for Lambda environmental variable"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.search
+	File: /modules/lambda-functions/main.tf:68-102
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_45: "Ensure no hard-coded secrets exist in lambda environment"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.search
+	File: /modules/lambda-functions/main.tf:68-102
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_363: "Ensure Lambda Runtime is not deprecated"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.search
+	File: /modules/lambda-functions/main.tf:68-102
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_50: "X-Ray tracing is enabled for Lambda"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.search
+	File: /modules/lambda-functions/main.tf:68-102
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.lambda_functions.aws_iam_role_policy_attachment.search_dynamodb
+	File: /modules/lambda-functions/main.tf:104-107
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_115: "Ensure that AWS Lambda function is configured for function-level concurrent execution limit"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.lock_slot
+	File: /modules/lambda-functions/main.tf:117-152
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_173: "Check encryption settings for Lambda environmental variable"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.lock_slot
+	File: /modules/lambda-functions/main.tf:117-152
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_45: "Ensure no hard-coded secrets exist in lambda environment"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.lock_slot
+	File: /modules/lambda-functions/main.tf:117-152
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_363: "Ensure Lambda Runtime is not deprecated"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.lock_slot
+	File: /modules/lambda-functions/main.tf:117-152
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_50: "X-Ray tracing is enabled for Lambda"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.lock_slot
+	File: /modules/lambda-functions/main.tf:117-152
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.lambda_functions.aws_iam_role_policy_attachment.lock_slot_dynamodb
+	File: /modules/lambda-functions/main.tf:154-157
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_117: "Ensure that AWS Lambda function is configured inside a VPC"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.process_payment
+	File: /modules/lambda-functions/main.tf:167-214
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_115: "Ensure that AWS Lambda function is configured for function-level concurrent execution limit"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.process_payment
+	File: /modules/lambda-functions/main.tf:167-214
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_173: "Check encryption settings for Lambda environmental variable"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.process_payment
+	File: /modules/lambda-functions/main.tf:167-214
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_45: "Ensure no hard-coded secrets exist in lambda environment"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.process_payment
+	File: /modules/lambda-functions/main.tf:167-214
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_363: "Ensure Lambda Runtime is not deprecated"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.process_payment
+	File: /modules/lambda-functions/main.tf:167-214
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_50: "X-Ray tracing is enabled for Lambda"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.process_payment
+	File: /modules/lambda-functions/main.tf:167-214
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.lambda_functions.aws_iam_role_policy_attachment.process_payment_secret
+	File: /modules/lambda-functions/main.tf:216-219
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.lambda_functions.aws_iam_role_policy_attachment.process_payment_vpc
+	File: /modules/lambda-functions/main.tf:221-227
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_116: "Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.release_lock
+	File: /modules/lambda-functions/main.tf:237-280
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_115: "Ensure that AWS Lambda function is configured for function-level concurrent execution limit"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.release_lock
+	File: /modules/lambda-functions/main.tf:237-280
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_173: "Check encryption settings for Lambda environmental variable"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.release_lock
+	File: /modules/lambda-functions/main.tf:237-280
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_45: "Ensure no hard-coded secrets exist in lambda environment"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.release_lock
+	File: /modules/lambda-functions/main.tf:237-280
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_363: "Ensure Lambda Runtime is not deprecated"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.release_lock
+	File: /modules/lambda-functions/main.tf:237-280
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_50: "X-Ray tracing is enabled for Lambda"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.release_lock
+	File: /modules/lambda-functions/main.tf:237-280
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.lambda_functions.aws_iam_role_policy_attachment.release_lock_dynamodb
+	File: /modules/lambda-functions/main.tf:282-285
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_116: "Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.notify
+	File: /modules/lambda-functions/main.tf:295-330
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_115: "Ensure that AWS Lambda function is configured for function-level concurrent execution limit"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.notify
+	File: /modules/lambda-functions/main.tf:295-330
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_173: "Check encryption settings for Lambda environmental variable"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.notify
+	File: /modules/lambda-functions/main.tf:295-330
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_45: "Ensure no hard-coded secrets exist in lambda environment"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.notify
+	File: /modules/lambda-functions/main.tf:295-330
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_363: "Ensure Lambda Runtime is not deprecated"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.notify
+	File: /modules/lambda-functions/main.tf:295-330
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_50: "X-Ray tracing is enabled for Lambda"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.notify
+	File: /modules/lambda-functions/main.tf:295-330
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.lambda_functions.aws_iam_role_policy_attachment.notify_ses_sns
+	File: /modules/lambda-functions/main.tf:332-335
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.lambda_functions.aws_iam_role_policy_attachment.notify_sqs_consume
+	File: /modules/lambda-functions/main.tf:337-340
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_319: "Ensure that CloudWatch alarm actions are enabled"
+	PASSED for resource: module.observability.aws_cloudwatch_metric_alarm.release_lock_errors
+	File: /modules/observability/main.tf:73-89
+	Calling File: /main.tf:453-463
+Check: CKV_AWS_319: "Ensure that CloudWatch alarm actions are enabled"
+	PASSED for resource: module.observability.aws_cloudwatch_metric_alarm.notify_queue_backlog
+	File: /modules/observability/main.tf:94-110
+	Calling File: /main.tf:453-463
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_149: "Ensure that Secrets Manager secret is encrypted using KMS CMK"
+	PASSED for resource: module.secrets.aws_secretsmanager_secret.payment_gateway
+	File: /modules/secrets/main.tf:19-39
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_62: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.secrets.aws_iam_policy.payment_gateway_read
+	File: /modules/secrets/main.tf:79-83
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_63: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.secrets.aws_iam_policy.payment_gateway_read
+	File: /modules/secrets/main.tf:79-83
+	Calling File: /main.tf:94-100
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_285: "Ensure State Machine has execution history logging enabled"
+	PASSED for resource: module.step_functions.aws_sfn_state_machine.booking_saga
+	File: /modules/step-functions/main.tf:27-132
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_284: "Ensure State Machine has X-Ray tracing enabled"
+	PASSED for resource: module.step_functions.aws_sfn_state_machine.booking_saga
+	File: /modules/step-functions/main.tf:27-132
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_66: "Ensure that CloudWatch Log Group specifies retention days"
+	PASSED for resource: module.step_functions.aws_cloudwatch_log_group.step_functions
+	File: /modules/step-functions/main.tf:134-143
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_158: "Ensure that CloudWatch Log Group is encrypted by KMS"
+	PASSED for resource: module.step_functions.aws_cloudwatch_log_group.step_functions
+	File: /modules/step-functions/main.tf:134-143
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_338: "Ensure CloudWatch log groups retains logs for at least 1 year"
+	PASSED for resource: module.step_functions.aws_cloudwatch_log_group.step_functions
+	File: /modules/step-functions/main.tf:134-143
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_61: "Ensure AWS IAM policy does not allow assume role permission across all services"
+	PASSED for resource: module.step_functions.aws_iam_role.step_functions
+	File: /modules/step-functions/main.tf:158-162
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_60: "Ensure IAM role allows only specific services or principals to assume it"
+	PASSED for resource: module.step_functions.aws_iam_role.step_functions
+	File: /modules/step-functions/main.tf:158-162
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.step_functions.aws_iam_role.step_functions
+	File: /modules/step-functions/main.tf:158-162
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_393: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order on IAM role"
+	PASSED for resource: module.step_functions.aws_iam_role.step_functions
+	File: /modules/step-functions/main.tf:158-162
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_62: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.step_functions.aws_iam_role_policy.step_functions_permissions
+	File: /modules/step-functions/main.tf:198-202
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_63: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.step_functions.aws_iam_role_policy.step_functions_permissions
+	File: /modules/step-functions/main.tf:198-202
+	Calling File: /main.tf:212-222
+Check: CKV_AWS_41: "Ensure no hard coded AWS access key and secret key exists in provider"
+	PASSED for resource: aws.default
+	File: /versions.tf:21-27
+Check: CKV_AWS_41: "Ensure no hard coded AWS access key and secret key exists in provider"
+	PASSED for resource: aws.us_east_1
+	File: /versions.tf:34-41
+Check: CKV2_AWS_16: "Ensure that Auto Scaling is enabled on your DynamoDB tables"
+	PASSED for resource: module.dynamodb.aws_dynamodb_table.slots
+	File: /modules/dynamodb/main.tf:33-125
+Check: CKV2_AWS_64: "Ensure KMS key Policy is defined"
+	PASSED for resource: aws_kms_key.app
+	File: /main.tf:34-79
+Check: CKV2_AWS_72: "Ensure AWS CloudFront origin protocol policy enforces HTTPS-only"
+	PASSED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+Check: CKV2_AWS_46: "Ensure AWS CloudFront Distribution with S3 have Origin Access set to enabled"
+	PASSED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+Check: CKV2_AWS_31: "Ensure WAF2 has a Logging Configuration"
+	PASSED for resource: aws_wafv2_web_acl.cloudfront
+	File: /main.tf:257-329
+Check: CKV2_AWS_31: "Ensure WAF2 has a Logging Configuration"
+	PASSED for resource: aws_wafv2_web_acl.api_gateway
+	File: /main.tf:348-407
+Check: CKV2_AWS_53: "Ensure AWS API gateway request is validated"
+	PASSED for resource: module.api_gateway.aws_api_gateway_method.create_booking
+	File: /modules/api-gateway/main.tf:50-57
+Check: CKV2_AWS_29: "Ensure public API gateway are protected by WAF"
+	PASSED for resource: module.api_gateway.aws_api_gateway_stage.this
+	File: /modules/api-gateway/main.tf:154-179
+Check: CKV2_AWS_75: "Ensure no open CORS policy"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.search
+	File: /modules/lambda-functions/main.tf:68-102
+Check: CKV2_AWS_75: "Ensure no open CORS policy"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.lock_slot
+	File: /modules/lambda-functions/main.tf:117-152
+Check: CKV2_AWS_75: "Ensure no open CORS policy"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.process_payment
+	File: /modules/lambda-functions/main.tf:167-214
+Check: CKV2_AWS_75: "Ensure no open CORS policy"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.release_lock
+	File: /modules/lambda-functions/main.tf:237-280
+Check: CKV2_AWS_75: "Ensure no open CORS policy"
+	PASSED for resource: module.lambda_functions.aws_lambda_function.notify
+	File: /modules/lambda-functions/main.tf:295-330
+Check: CKV2_AWS_32: "Ensure CloudFront distribution has a response headers policy attached"
+	PASSED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+Check: CKV2_AWS_54: "Ensure AWS CloudFront distribution is using secure SSL protocols for HTTPS communication"
+	PASSED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+Check: CKV2_AWS_5: "Ensure that Security Groups are attached to another resource"
+	PASSED for resource: module.elasticache.aws_security_group.cache
+	File: /modules/elasticache/main.tf:32-47
+Check: CKV2_AWS_5: "Ensure that Security Groups are attached to another resource"
+	PASSED for resource: aws_security_group.lambda_vpc
+	File: /main.tf:126-137
+Check: CKV2_AWS_56: "Ensure AWS Managed IAMFullAccess IAM policy is not used."
+	PASSED for resource: module.async_notifications.aws_iam_role.pipe_role
+	File: /modules/async-notifications/main.tf:72-76
+Check: CKV2_AWS_56: "Ensure AWS Managed IAMFullAccess IAM policy is not used."
+	PASSED for resource: module.iam.aws_iam_role.lambda_execution
+	File: /modules/iam/main.tf:32-36
+Check: CKV2_AWS_56: "Ensure AWS Managed IAMFullAccess IAM policy is not used."
+	PASSED for resource: module.iam.aws_iam_role_policy_attachment.lambda_basic_execution
+	File: /modules/iam/main.tf:44-47
+Check: CKV2_AWS_56: "Ensure AWS Managed IAMFullAccess IAM policy is not used."
+	PASSED for resource: module.iam.aws_iam_role_policy_attachment.lambda_xray
+	File: /modules/iam/main.tf:54-57
+Check: CKV2_AWS_56: "Ensure AWS Managed IAMFullAccess IAM policy is not used."
+	PASSED for resource: module.lambda_functions.aws_iam_role_policy_attachment.process_payment_vpc
+	File: /modules/lambda-functions/main.tf:221-227
+Check: CKV2_AWS_77: "Ensure AWS API Gateway Rest API attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability"
+	PASSED for resource: module.api_gateway.aws_api_gateway_stage.this
+	File: /modules/api-gateway/main.tf:154-179
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_assume_role
+	File: /modules/api-gateway/main.tf:62-71
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.api_gateway.aws_iam_policy_document.apigw_start_execution
+	File: /modules/api-gateway/main.tf:79-85
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_assume_role
+	File: /modules/async-notifications/main.tf:61-70
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.pipe_permissions
+	File: /modules/async-notifications/main.tf:78-108
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.sqs_consume
+	File: /modules/async-notifications/main.tf:154-165
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.async_notifications.aws_iam_policy_document.notify_permissions
+	File: /modules/async-notifications/main.tf:190-204
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.dynamodb.aws_iam_policy_document.slots_rw
+	File: /modules/dynamodb/main.tf:134-160
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.iam.aws_iam_policy_document.lambda_assume_role
+	File: /modules/iam/main.tf:20-30
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.iam.aws_iam_policy_document.kms_decrypt
+	File: /modules/iam/main.tf:65-80
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.lambda_functions.aws_iam_policy_document.lambda_dlq_send
+	File: /modules/lambda-functions/main.tf:41-48
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.secrets.aws_iam_policy_document.payment_gateway_read
+	File: /modules/secrets/main.tf:70-77
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_assume_role
+	File: /modules/step-functions/main.tf:147-156
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.step_functions.aws_iam_policy_document.step_functions_invoke_lambdas
+	File: /modules/step-functions/main.tf:164-196
+Check: CKV_AWS_158: "Ensure that CloudWatch Log Group is encrypted by KMS"
+	FAILED for resource: aws_cloudwatch_log_group.waf_cloudfront
+	File: /main.tf:334-339
+Check: CKV_AWS_158: "Ensure that CloudWatch Log Group is encrypted by KMS"
+	FAILED for resource: aws_cloudwatch_log_group.waf_api_gateway
+	File: /main.tf:409-413
+Check: CKV_AWS_237: "Ensure Create before destroy for API Gateway"
+	FAILED for resource: module.api_gateway.aws_api_gateway_rest_api.this
+	File: /modules/api-gateway/main.tf:15-23
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_120: "Ensure API Gateway caching is enabled"
+	FAILED for resource: module.api_gateway.aws_api_gateway_stage.this
+	File: /modules/api-gateway/main.tf:154-179
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_225: "Ensure API Gateway method setting caching is enabled"
+	FAILED for resource: module.api_gateway.aws_api_gateway_method_settings.this
+	File: /modules/api-gateway/main.tf:192-203
+	Calling File: /main.tf:226-236
+Check: CKV_AWS_174: "Verify CloudFront Distribution Viewer Certificate is using TLS v1.2 or higher"
+	FAILED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+	Calling File: /main.tf:240-250
+Check: CKV_AWS_86: "Ensure CloudFront distribution has Access Logging enabled"
+	FAILED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+	Calling File: /main.tf:240-250
+Check: CKV_AWS_374: "Ensure AWS CloudFront web distribution has geo restriction enabled"
+	FAILED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+	Calling File: /main.tf:240-250
+Check: CKV_AWS_310: "Ensure CloudFront distributions should have origin failover configured"
+	FAILED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+	Calling File: /main.tf:240-250
+Check: CKV_AWS_259: "Ensure CloudFront response header policy enforces Strict Transport Security"
+	FAILED for resource: module.frontend.aws_cloudfront_response_headers_policy.security_headers
+	File: /modules/frontend/main.tf:107-131
+	Calling File: /main.tf:240-250
+Check: CKV_AWS_116: "Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.search
+	File: /modules/lambda-functions/main.tf:68-102
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_117: "Ensure that AWS Lambda function is configured inside a VPC"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.search
+	File: /modules/lambda-functions/main.tf:68-102
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_272: "Ensure AWS Lambda function is configured to validate code-signing"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.search
+	File: /modules/lambda-functions/main.tf:68-102
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_116: "Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.lock_slot
+	File: /modules/lambda-functions/main.tf:117-152
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_117: "Ensure that AWS Lambda function is configured inside a VPC"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.lock_slot
+	File: /modules/lambda-functions/main.tf:117-152
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_272: "Ensure AWS Lambda function is configured to validate code-signing"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.lock_slot
+	File: /modules/lambda-functions/main.tf:117-152
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_116: "Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.process_payment
+	File: /modules/lambda-functions/main.tf:167-214
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_272: "Ensure AWS Lambda function is configured to validate code-signing"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.process_payment
+	File: /modules/lambda-functions/main.tf:167-214
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_117: "Ensure that AWS Lambda function is configured inside a VPC"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.release_lock
+	File: /modules/lambda-functions/main.tf:237-280
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_272: "Ensure AWS Lambda function is configured to validate code-signing"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.release_lock
+	File: /modules/lambda-functions/main.tf:237-280
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_117: "Ensure that AWS Lambda function is configured inside a VPC"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.notify
+	File: /modules/lambda-functions/main.tf:295-330
+	Calling File: /main.tf:183-208
+Check: CKV_AWS_272: "Ensure AWS Lambda function is configured to validate code-signing"
+	FAILED for resource: module.lambda_functions.aws_lambda_function.notify
+	File: /modules/lambda-functions/main.tf:295-330
+	Calling File: /main.tf:183-208
+Check: CKV2_AWS_42: "Ensure AWS CloudFront distribution uses custom SSL certificate"
+	FAILED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+Check: CKV2_AWS_51: "Ensure AWS API Gateway endpoints uses client certificate authentication"
+	FAILED for resource: module.api_gateway.aws_api_gateway_stage.this
+	File: /modules/api-gateway/main.tf:154-179
+Check: CKV2_AWS_57: "Ensure Secrets Manager secrets should have automatic rotation enabled"
+	FAILED for resource: module.secrets.aws_secretsmanager_secret.payment_gateway
+	File: /modules/secrets/main.tf:19-39
+Check: CKV2_AWS_47: "Ensure AWS CloudFront attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability"
+	FAILED for resource: module.frontend.aws_cloudfront_distribution.frontend
+	File: /modules/frontend/main.tf:45-101
+Check: CKV2_AWS_4: "Ensure API Gateway stage have logging level defined as appropriate"
+	FAILED for resource: module.api_gateway.aws_api_gateway_stage.this
+	File: /modules/api-gateway/main.tf:154-179
+

@@ -1,0 +1,74 @@
+{
+  "_comment": "Attach this to the IAM user/role that runs `terraform apply` for this repo. It is intentionally broader than the runtime least-privilege policies inside the modules themselves (those govern what the deployed Lambdas can do; this governs what the DEPLOYER can do). Scope resource ARNs down further once you know your account ID and chosen project_name/environment prefix.",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CoreServiceAccess",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:*",
+        "lambda:*",
+        "states:*",
+        "apigateway:*",
+        "cognito-idp:*",
+        "cognito-identity:*",
+        "elasticache:*",
+        "secretsmanager:*",
+        "sqs:*",
+        "sns:*",
+        "ses:*",
+        "events:*",
+        "pipes:*",
+        "cloudwatch:*",
+        "logs:*",
+        "cloudfront:*",
+        "amplify:*",
+        "xray:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "IAMForServiceRoles",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateRole",
+        "iam:DeleteRole",
+        "iam:GetRole",
+        "iam:PassRole",
+        "iam:CreatePolicy",
+        "iam:DeletePolicy",
+        "iam:GetPolicy",
+        "iam:GetPolicyVersion",
+        "iam:ListPolicyVersions",
+        "iam:AttachRolePolicy",
+        "iam:DetachRolePolicy",
+        "iam:PutRolePolicy",
+        "iam:DeleteRolePolicy",
+        "iam:GetRolePolicy",
+        "iam:TagRole",
+        "iam:TagPolicy"
+      ],
+      "Resource": "*",
+      "_comment_scope": "Tighten this to arn:aws:iam::<account-id>:role/<project_name>-* and :policy/<project_name>-* once you know those values -- left broad here only because project_name is a variable, not a fixed value this static file can reference."
+    },
+    {
+      "Sid": "EC2ForVPCLookup",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:CreateSecurityGroup",
+        "ec2:DeleteSecurityGroup",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:AuthorizeSecurityGroupEgress",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupEgress",
+        "ec2:CreateTags",
+        "ec2:DescribeNetworkInterfaces"
+      ],
+      "Resource": "*",
+      "_comment": "Read-only VPC lookups plus security-group management -- this repo does NOT create/delete VPCs or subnets themselves, only references existing ones."
+    }
+  ]
+}

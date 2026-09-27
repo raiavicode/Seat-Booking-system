@@ -1,0 +1,26 @@
+# Terraform state and working files -- never commit these, they can
+# contain sensitive values and are environment-specific by nature.
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+crash.*.log
+
+# Your real variable values -- copy terraform.tfvars.example to this
+# filename and fill it in locally; never commit the real one.
+terraform.tfvars
+*.auto.tfvars
+
+# Your real backend config -- copy backend.tf.example to this
+# filename; never commit the real one (bucket/table names can be
+# sensitive infrastructure details).
+backend.tf
+
+# Lambda build artifacts (zipped by archive_file at apply time --
+# regenerated automatically, no reason to version them).
+.build/
+
+# OS/editor noise
+.DS_Store
+*.swp

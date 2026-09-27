@@ -1,0 +1,23 @@
+# Rename this file to backend.tf and fill in real values to store
+# Terraform state remotely (in S3, with DynamoDB for state locking)
+# instead of a local terraform.tfstate file.
+#
+# WHY THIS MATTERS: local state works fine solo, but has no locking
+# (two people running `apply` at once can corrupt each other's
+# changes) and lives only on your machine (lose the laptop, lose the
+# record of what's actually deployed). For anything beyond a personal
+# sandbox, use a remote backend.
+#
+# You must create the S3 bucket and DynamoDB table BEFORE running
+# `terraform init` with this backend configured -- Terraform can't
+# create the place it's about to store its own state.
+
+terraform {
+  backend "s3" {
+    bucket         = "REPLACE_ME-terraform-state"
+    key            = "seat-booking/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "REPLACE_ME-terraform-locks"
+    encrypt        = true
+  }
+}
